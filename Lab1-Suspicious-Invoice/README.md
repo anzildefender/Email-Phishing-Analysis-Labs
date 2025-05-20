@@ -36,7 +36,7 @@ This email passed through **seven** `Received` hops. The **first** (topmost) ent
 - **DKIM:** `none`  
 - **DMARC:** `none`  
 
-![Authentication-Results Screenshot](path/to/screenshot2.png)
+![Authentication-Results Screenshot](images/auth.png)
 
 ---
 
