@@ -111,8 +111,8 @@ Clearly, the offer is too good to be true and designed to lure victims into a re
 - **Location:** Beijing, China  
 - **VirusTotal:** Multiple reports of similar spam/phishing campaigns.
 
-![Domain-OSINT Screenshot](images/whois(yobow.cn).png)
-![Domain-OSINT Screenshot](images/virustotal(yobow.cn).png)
+![Domain-OSINT Screenshot](images/whois(yobow.cn).jpg)
+![Domain-OSINT Screenshot](images/virustotal(yobow.cn).jpg)
 
 ---
 
@@ -130,9 +130,10 @@ Clearly, the offer is too good to be true and designed to lure victims into a re
 
 - **AbuseIPDB:** Repeated spam reports  
 - **IPVoid:** Flagged by 3 blacklists  
-- **VPN Check:** Not associated with any VPN service  
+- **VPN Check:** Not associated with any VPN service (according ipinfo.io)
 
-![IP-Reputation Screenshot](images/ipreputation)
+![IP-Reputation Screenshot](images/ipreputation.png)
+![IP-Reputation Screenshot](images/vpn.png)
 
 ---
 
@@ -157,5 +158,3 @@ Clearly, the offer is too good to be true and designed to lure victims into a re
    - Update email filtering rules to flag future messages from `yobow.cn`.  
 
 ---
-
-*Report generated as part of Phishing Email Analysis Labs.*  
