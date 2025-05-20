@@ -74,23 +74,30 @@ The mismatch between **From** and **Reply-To**, plus undisclosed recipients, are
 - **X-Mailer:** `Microsoft Outlook Express`  
 - **Content-Type:** `text/html` (1 occurrence)
 
-![Metadata Screenshot](path/to/screenshot4.png)
+![Subject Screenshot](images/subject.png)
+![Date Screenshot](images/date.png)
+![Message-ID Screenshot](images/msgid.png)
+![X-Mailer Screenshot](images/xmailer.png)
+![Content-Type Screenshot](images/contenttype1.png)
+
 
 ---
 
 ## 3. Email Body
 
+![Email-Body Screenshot](path/to/screenshot5.png)
+
 The HTML-formatted body promises an inheritance of **16 million USD** and urges the recipient to reply to two “diplomatic agents”:
+
 
 - **Cynthia R. James**  
   `agentcynthiajamescontact01@gmail.com`
+  
 
 - **John Williams**  
   `dr.philipmaxwell303@gmail.com`
 
 Clearly, the offer is too good to be true and designed to lure victims into a reply.
-
-![Email-Body Screenshot](path/to/screenshot5.png)
 
 ---
 
