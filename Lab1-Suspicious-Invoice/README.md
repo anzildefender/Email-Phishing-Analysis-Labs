@@ -1,0 +1,3 @@
+# Lab 1 – Suspicious Invoice Email Analysis
+
+This document contains analysis of a phishing email disguised as an invoice...
