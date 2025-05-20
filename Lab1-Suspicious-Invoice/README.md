@@ -22,9 +22,11 @@ In this lab, we conducted a deep-dive analysis of a suspicious email purporting 
 
 This email passed through **seven** `Received` hops. The **first** (topmost) entry indicates the final hop before delivery; the **seventh** (bottom) entry shows the initial server:
 
+![Received Fields Screenshot](images/recieved.png)
+
 > **Closest to sender:** `mail.yobow.cn`
 
-![Received Fields Screenshot](images/recieved.png)
+![Received Fields Screenshot](images/recievedclosest.png)
 
 
 ---
@@ -49,7 +51,10 @@ This email passed through **seven** `Received` hops. The **first** (topmost) ent
 
 The mismatch between **From** and **Reply-To**, plus undisclosed recipients, are classic phishing indicators.
 
-![Header-Fields Screenshot](path/to/screenshot3.png)
+![Return-Path Screenshot](path/to/images/returnpath.png)
+![From Screenshot](/images/from.png)
+![Reply-To Screenshot](replyto.png)
+![To Screenshot](to.png)
 
 ---
 
