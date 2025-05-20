@@ -51,10 +51,10 @@ This email passed through **seven** `Received` hops. The **first** (topmost) ent
 
 The mismatch between **From** and **Reply-To**, plus undisclosed recipients, are classic phishing indicators.
 
-![Return-Path Screenshot](/images/returnpath.png)
-![From Screenshot](/images/from.png)
-![Reply-To Screenshot](/images/replyto.png)
-![To Screenshot](/images/to.png)
+![Return-Path Screenshot](images/returnpath.png)
+![From Screenshot](images/from.png)
+![Reply-To Screenshot](images/replyto.png)
+![To Screenshot](images/to.png)
 
 ---
 
