@@ -85,7 +85,7 @@ The mismatch between **From** and **Reply-To**, plus undisclosed recipients, are
 
 ## 3. Email Body
 
-![Email-Body Screenshot](path/to/screenshot5.png)
+![Email-Body Screenshot](images/body.png)
 
 The HTML-formatted body promises an inheritance of **16 million USD** and urges the recipient to reply to two “diplomatic agents”:
 
