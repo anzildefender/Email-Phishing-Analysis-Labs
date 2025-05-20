@@ -1,13 +1,8 @@
 # Phishing Email Analysis Report
 
-**Date of Analysis:** December 2023  
-**Analyst:** Mohammed Anzil T A  
+## 1. Objective
 
----
-
-## 1. Introduction
-
-In this lab, we conducted a deep-dive analysis of a suspicious email purporting to offer US\$16 million to the recipient. Our goals were to:
+In this lab, I conducted a deep-dive analysis of a suspicious email to the recipient. My goal was to:
 
 1. Trace the email’s path through mail servers.  
 2. Inspect key header fields for inconsistencies.  
@@ -15,6 +10,18 @@ In this lab, we conducted a deep-dive analysis of a suspicious email purporting 
 4. Determine whether the email is a phishing attempt.
 
 ---
+
+### 1.1 Skills Learned
+
+- Email header forensics: parsing and interpreting Received, Authentication-Results, Message-ID, and X‑headers
+
+- Authentication analysis: understanding SPF, DKIM, and DMARC outcomes and implications
+
+- Mail flow tracing: mapping an email’s journey through multiple servers
+
+- OSINT investigations: performing WHOIS, VirusTotal, AbuseIPDB, and IPVoid lookups on domains and IP addresses
+
+- Social‑engineering detection: recognizing mismatched From/Reply-To, undisclosed recipients, and lure-based subject lines
 
 ## 2. Email Header Analysis
 
@@ -49,12 +56,13 @@ This email passed through **seven** `Received` hops. The **first** (topmost) ent
 - **Reply-To:** `agentcynthiajamescontact01@gmail.com`  
 - **To:** `Undisclosed recipients`  
 
-The mismatch between **From** and **Reply-To**, plus undisclosed recipients, are classic phishing indicators.
 
 ![Return-Path Screenshot](images/returnpath.png)
 ![From Screenshot](images/from.png)
 ![Reply-To Screenshot](images/replyto.png)
 ![To Screenshot](images/to.png)
+
+The mismatch between **From** and **Reply-To**, plus undisclosed recipients, are classic phishing indicators.
 
 ---
 
