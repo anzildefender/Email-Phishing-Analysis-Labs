@@ -24,7 +24,8 @@ This email passed through **seven** `Received` hops. The **first** (topmost) ent
 
 > **Closest to sender:** `mail.yobow.cn`
 
-![Received-Fields Screenshot](path/to/screenshot1.png)
+![Received Fields Screenshot](images/recieved.png)
+
 
 ---
 
