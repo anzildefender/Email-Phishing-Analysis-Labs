@@ -96,6 +96,8 @@ The HTML-formatted body promises an inheritance of **16 million USD** and urge
 
 - **John Williams**  
   `dr.philipmaxwell303@gmail.com`
+  
+![Email-Body Screenshot](images/body2.png)
 
 Clearly, the offer is too good to be true and designed to lure victims into a reply.
 
@@ -109,7 +111,8 @@ Clearly, the offer is too good to be true and designed to lure victims into a re
 - **Location:** Beijing, China  
 - **VirusTotal:** Multiple reports of similar spam/phishing campaigns.
 
-![Domain-OSINT Screenshot](path/to/screenshot6.png)
+![Domain-OSINT Screenshot](images/whois(yobow.cn).png)
+![Domain-OSINT Screenshot](images/virustotal(yobow.cn).png)
 
 ---
 
@@ -120,13 +123,16 @@ Clearly, the offer is too good to be true and designed to lure victims into a re
 - **WHOIS/DomainTools:** Legitimate ISP  
 - **VirusTotal:** No vendor flags for phishing.
 
+![Domain-OSINT Screenshot](images/whois(sasktel.net).png)
+![Domain-OSINT Screenshot](images/virustotal(sasktel.net).png)
+
 ### 4.3 Sender IP (`183.56.179.169`)
 
 - **AbuseIPDB:** Repeated spam reports  
 - **IPVoid:** Flagged by 3 blacklists  
 - **VPN Check:** Not associated with any VPN service  
 
-![IP-Reputation Screenshot](path/to/screenshot7.png)
+![IP-Reputation Screenshot](images/ipreputation)
 
 ---
 
