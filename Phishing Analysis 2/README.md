@@ -1,1 +1,147 @@
+# Phishing Email Analysis Report  
+
+---
+
+## 1. Objective  
+In this lab, I analyzed a suspicious email claiming an account lockout. My goals were:  
+1. Trace the email’s path through Microsoft mail servers.  
+2. Identify forged headers and malicious content.  
+3. Validate sender reputation via OSINT.  
+4. Confirm phishing intent through URL/file analysis.  
+
+---
+
+## 2. Email Header Analysis  
+
+### 2.1 Mail Server Path (`Received` Fields)  
+![Received Fields](images/received_microsoft.png)  
+*Screenshot 1: Email routed through Microsoft Outlook servers (`outlook.office365[.]com`).*  
+
+**Key Observations**:  
+- **Closest to sender**: Microsoft infrastructure (`mail-pf1-f856.outlook.office365[.]com`).  
+- **Legitimate IP**: `40.107.215.98` (Microsoft-owned, low reputation weight).  
+
+---
+
+### 2.2 Authentication Results  
+![Authentication-Results](images/auth_results.png)  
+*Screenshot 2: SPF passed (Microsoft IP), DKIM not configured.*  
+
+| **Check** | **Result**       | **Implication**                          |  
+|-----------|------------------|------------------------------------------|  
+| SPF       | Pass             | IP authorized by Microsoft               |  
+| DKIM      | None             | No domain validation                     |  
+| DMARC     | BestGuessPass    | No DMARC policy for sender domain        |  
+
+---
+
+### 2.3 Envelope & Display Fields  
+- **Return-Path**: `nuthostsrl.SaintU74045Walker@comunidadeduar[.]com.ar`  
+- **From**: `noreply@Quick Response <nuthostsrl.SaintU74045Walker@comunidadeduar[.]com.ar>`  
+- **To**: Undisclosed recipients  
+- **Subject**: `We locked your account for security reason - Fri, September 08, 2023 10:11 AM`  
+
+**Red Flags**:  
+- Mismatched display name (`noreply@Quick Response`) vs. email domain.  
+- Urgency-driven subject line.  
+
+---
+
+### 2.4 Message Metadata  
+- **Date**: `Fri, 8 Sep 2023 10:11:07 +0500`  
+- **Message-ID**: `<lCoLrriMV1genj0ZtZQMKEVTBnhfL56Wal3quBo1vU@mail-pf1-f856.outlook.office365.com>`  
+- **X-Mailer**: `WebService/1.1.18291 YMailNorrin` (MacOS Chrome user agent)  
+- **Content-Type**: `multipart/mixed` with boundary `NextPart`  
+
+![X-Mailer Analysis](images/xmailer_webservice.png)  
+*Screenshot 3: Attacker used a webmail client (MacOS/Chrome).*  
+
+---
+
+## 3. Email Body & Attachments  
+
+### 3.1 HTML Content  
+![Email Body](images/body_scarcity.png)  
+*Screenshot 4: Fake account lockout warning with "secure your account" urgency.*  
+
+**Suspicious URLs**:  
+- `facebook[.]com` (decoy link)  
+- `script.google[.]com/.../exec` (potential credential harvester)  
+
+---
+
+### 3.2 Base64 Attachment Analysis  
+**File**: `Detailsdisable-262340.pdf` (Base64-encoded HTML)  
+1. **Decoding with CyberChef**:  
+   ![CyberChef Decoding](images/cyberchef_base64.png)  
+   *Screenshot 5: Revealed HTML content instead of PDF.*  
+
+2. **File Type Verification**:  
+   ```bash
+   $ file Detailsdisable-262340.pdf  
+   HTML document, UTF-8 Unicode text
+   ```  
+
+**Risk**: Masquerading HTML as PDF to bypass filters.  
+
+---
+
+## 4. OSINT & Reputation Checks  
+
+### 4.1 Sender Domain (`comunidadeduar[.]com.ar`)  
+- **DomainTools**: Created 2013-07-10 (Buenos Aires, Argentina).  
+- **VirusTotal**: 1 vendor flag + subdomain `google.comunidadeduar[.]com.ar` linked to phishing.  
+
+![VirusTotal Relations](images/virustotal_pivot.png)  
+*Screenshot 6: Phishing-linked subdomains.*  
+
+### 4.2 Sender IP (`40.107.215.98`)  
+- **ISP**: Microsoft (legitimate cloud service IP).  
+- **AbuseIPDB**: Spam reports (low weight due to shared infrastructure).  
+
+---
+
+## 5. Conclusions & Recommendations  
+
+### 5.1 Phishing Indicators  
+- ✅ **Social Engineering**: Scarcity tactic ("account locked").  
+- ✅ **Domain Mismatch**: `comunidadeduar[.]com.ar` vs. "Quick Response".  
+- ✅ **Malicious Attachment**: Base64 HTML masquerading as PDF.  
+- ✅ **Suspicious URL**: `script.google[.]com/.../exec`.  
+
+### 5.2 Action Items  
+1. **Block IoCs**:  
+   - Domain: `comunidadeduar[.]com.ar`  
+   - Email: `nuthostsrl.SaintU74045Walker@comunidadeduar[.]com.ar`  
+   - URL: `script.google[.]com/.../exec`  
+
+2. **Hunt & Scope**:  
+   ```sql
+   SELECT * FROM emails 
+   WHERE subject LIKE "%locked your account%" 
+   AND date BETWEEN "2023-09-01" AND "2023-09-30"
+   ```  
+
+3. **User Awareness**: Train staff to identify mismatched sender domains.  
+
+---
+
+## 6. 1.1 Skills Learned
+Email header forensics: parsing and interpreting Received, Authentication-Results, Message-ID, and X‑headers
+
+Authentication analysis: understanding SPF, DKIM, and DMARC outcomes and implications
+
+Mail flow tracing: mapping an email’s journey through multiple servers
+
+OSINT investigations: performing WHOIS, VirusTotal, AbuseIPDB, and IPVoid lookups on domains and IP addresses
+
+Social‑engineering detection: recognizing mismatched From/Reply-To, undisclosed recipients, and lure-based subject lines
+
+---
+
+
+🔧 **Tools Used**: CyberChef, URLScan, DomainTools, WSL, VirusTotal.  
+
+``` 
+
 
