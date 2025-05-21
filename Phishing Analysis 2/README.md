@@ -115,33 +115,33 @@ In this lab, I analyzed a suspicious email claiming an account lockout. My goals
    - Email: `nuthostsrl.SaintU74045Walker@comunidadeduar[.]com.ar`  
    - URL: `script.google[.]com/.../exec`  
 
-2. **Hunt & Scope**:  
-   ```sql
-   SELECT * FROM emails 
-   WHERE subject LIKE "%locked your account%" 
-   AND date BETWEEN "2023-09-01" AND "2023-09-30"
-   ```  
+2. **Action Items**  
+   - **Delete** the email and block the sender.  
+   - **Search** SIEM/email gateway logs for subject `"We Locked Your Account for Security Reasons"` and any traffic to/from:
+     - `comunidadeduar[.]com.ar`  
 
-3. **User Awareness**: Train staff to identify mismatched sender domains.  
+3. **Next Steps**  
+   - Notify users and the security team of this phishing campaign.  
+   - Update email filtering rules to flag future messages from `comunidadeduar[.]com.ar`.  
+
 
 ---
 
 ## 6. 1.1 Skills Learned
-Email header forensics: parsing and interpreting Received, Authentication-Results, Message-ID, and X‑headers
+- Email header forensics: parsing and interpreting Received, Authentication-Results, Message-ID, and X‑headers
 
-Authentication analysis: understanding SPF, DKIM, and DMARC outcomes and implications
+- Authentication analysis: understanding SPF, DKIM, and DMARC outcomes and implications
 
-Mail flow tracing: mapping an email’s journey through multiple servers
+- Mail flow tracing: mapping an email’s journey through multiple servers
 
-OSINT investigations: performing WHOIS, VirusTotal, AbuseIPDB, and IPVoid lookups on domains and IP addresses
+- OSINT investigations: performing WHOIS, VirusTotal, AbuseIPDB, and IPVoid lookups on domains and IP addresses
 
-Social‑engineering detection: recognizing mismatched From/Reply-To, undisclosed recipients, and lure-based subject lines
+- Social‑engineering detection: recognizing mismatched From/Reply-To, undisclosed recipients, and lure-based subject lines
 
 ---
 
+🔧 **Tools Used**: CyberChef, URLScan, Sublime EML Analyzer, whois, VirusTotal.  
 
-🔧 **Tools Used**: CyberChef, URLScan, DomainTools, WSL, VirusTotal.  
-
-``` 
+---
 
 
