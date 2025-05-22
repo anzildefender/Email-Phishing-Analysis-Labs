@@ -180,7 +180,7 @@ This technique bypasses many traditional email filters by disguising an HTML pay
 
 ## 6. Skills Learned
 
-* Email header forensics
+* Email header Analysis
 * OSINT: WHOIS, VirusTotal, AbuseIPDB lookup.
 * Recognizing visual and behavioral social engineering lures
 
