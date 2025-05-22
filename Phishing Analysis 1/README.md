@@ -1,4 +1,4 @@
-# Phishing Email Analysis Report
+# First Phishing Email Analysis Documentation
 
 ## 1. Objective
 
