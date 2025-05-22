@@ -177,5 +177,3 @@ The email falsely claims that the recipient is entitled to a **16 million USD in
 * Social engineering detection based on structural and content-based cues
 
 ---
-
-Let me know if you'd like this in Markdown for GitHub or exported as a printable PDF.
