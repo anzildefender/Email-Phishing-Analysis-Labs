@@ -1,4 +1,4 @@
-# Phishing Email Analysis Report  
+# Phishing Email Analysis Documentation
 
 ---
 
