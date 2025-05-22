@@ -1,10 +1,9 @@
 # **Third Phishing Email Analysis Documentation – "Trust Wallet Impersonation"**
 
----
 
-## 1. Objective
+## 1. Aim
 
-In this investigation, I analyzed a phishing email impersonating **Trust Wallet** with the aim to:
+In this investigation, I conducted an in-depth analysis of a phishing email impersonating **Trust Wallet**, a widely recognized cryptocurrency platform. The objective was to dissect the email's technical details and determine its authenticity using forensic techniques and open-source intelligence (OSINT) tools.
 
 ---
 
@@ -12,32 +11,34 @@ In this investigation, I analyzed a phishing email impersonating **Trust Wallet*
 
 ### 2.1 Mail Server Path (`Received` Fields)
 
-![Received Fields](images/recieved.png)  
+![Received Fields](images/recieved.png)
 *Screenshot 1: Received Fields*
 
 **Key Observations**:
 
-* Email originated from a suspicious IP address `193.23.160.33`, upon checking the SPF record of "trustwallet.com" Realised that this ip6 not associated with the legitimate **trustwallet.com** infrastructure.
+* The email originated from a suspicious IP address: `193.23.160.33`.
+* A review of the SPF record for `trustwallet.com` revealed that this IP address (IPv6) is not associated with the legitimate infrastructure of the organization, indicating probable spoofing.
 
 ---
 
 ### 2.2 Authentication Results
 
-![Authentication Results](images/auth.png)  
+![Authentication Results](images/auth.png)
+
 *Screenshot 2: Authentication Results*
 
-| **Check** | **Result**   | **Implication**                                |
-| --------- | ------------ | ---------------------------------------------- |
-| SPF       | **Fail**     | The sending server is not authorized           |
-| DKIM      | Not Provided | No digital signature to verify authenticity    |
-| DMARC     | Likely Fail  | Inherited from SPF failure, spoofing suspected |
-
+| **Check** | **Result**   | **Implication**                                                       |
+| --------- | ------------ | --------------------------------------------------------------------- |
+| SPF       | **Fail**     | The sending server is not authorized to send on behalf of the domain  |
+| DKIM      | Not Provided | Absence of a cryptographic signature to verify authenticity           |
+| DMARC     | Likely Fail  | Likely inherited failure due to SPF misalignment, suggesting spoofing |
 
 ---
 
 ### 2.3 Envelope & Display Fields
 
-![Envelop](images/envelop.png)  
+![Envelop](images/envelop.png)
+
 *Screenshot 3: Envelop & Display Fields*
 
 | **Field**   | **Value**                            |
@@ -47,11 +48,11 @@ In this investigation, I analyzed a phishing email impersonating **Trust Wallet*
 | To          | `terry.williams@hotmail.com`         |
 | Subject     | `Verify your Wallet`                 |
 
-**Red Flags**:
+**Red Flags Identified**:
 
-* Display name and domain mimic legitimate **TrustWallet**.
-* The sender domain `trust-wallet.com` is not the official `trustwallet.com`.
-* Urgency tactics in subject line.
+* The display name and email domain closely imitate the official **Trust Wallet** branding.
+* The sender domain `trust-wallet.com` (note the hyphen) is not the same as the official `trustwallet.com`.
+* The subject line uses urgency to provoke immediate action, a common phishing tactic.
 
 ---
 
@@ -59,25 +60,26 @@ In this investigation, I analyzed a phishing email impersonating **Trust Wallet*
 
 ### 3.1 HTML Content
 
-![Body](images/body.png)  
+![Body](images/body.png)
+
 *Screenshot 4: Body of the email*
 
-**Phishing Tactics Identified**:
+**Tactics Used in Email Body**:
 
-* Strong urgency in body: “Verify your Wallet now”, pushing immediate action.
-* **Two URLs** detected in the body:
+* The message invokes urgency: *"Verify your Wallet now"*—a known manipulation method.
+* Two embedded URLs identified:
 
-  * A **legitimate-looking link** pointing to `https://trustwallet.com` in the bottom (used to build trust).
-  * A **malicious embedded button** ("Verify Your Wallet") linking to:
+  * A **legitimate link** to `https://trustwallet.com`, likely used to build credibility.
+  * A **malicious hyperlink** tied to a button labeled “Verify Your Wallet”, redirecting to:
 
     > `https://trust-unlock.com`
 
-![Body](images/body1.png)  
-*Screenshot 5: Malicious Link which mimics the orginal "trustwallet.com"*
+![Body](images/body1.png)
 
+*Screenshot 5: Malicious Link which mimics the original "trustwallet.com"*
 
 **Analysis**:
-The attacker embeds a malicious URL under a legitimate-looking action button, leveraging **trust deception** and **urgency** to lure the user into clicking.
+The attacker disguises a malicious link beneath a trust-inspiring button. This is a textbook example of **trust exploitation** and **visual deception**, luring users into disclosing sensitive data.
 
 ---
 
@@ -85,83 +87,71 @@ The attacker embeds a malicious URL under a legitimate-looking action button, le
 
 ### 4.1 Domain Analysis
 
-| **Domain**       | **Observation**                                    |
-| ---------------- | -------------------------------------------------- |
-| trust-wallet.com | Suspicious, likely registered to impersonate brand |
-| trust-unlock.com | Malicious – used in phishing campaign              |
+| **Domain**         | **Observation**                                   |
+| ------------------ | ------------------------------------------------- |
+| `trustwallet.com`  | Legitimate – Official website of Trust Wallet     |
+| `trust-wallet.com` | Malicious – Registered with intent to impersonate |
+| `trust-unlock.com` | Malicious – Used in phishing redirection          |
 
-* `trustwallet.com` (legitimate): well-known cryptocurrency wallet provider.
-* `trust-wallet.com` (spoofed): subtle hyphen used to trick recipients.
+![virus total](images/virustotalclean.png)
 
-> **Suggested Tool Use**: WHOIS lookup for `trust-unlock.com`, check registration date and hosting provider.
-> **VirusTotal Scan**: Should reveal phishing or malware tags for `trust-unlock.com`.
+*Screenshot 5: VirusTotal Analysis of `trustwallet.com`*
 
-### 4.2 Sender IP Check
+![virus total](images/virustotal.png)
 
-| **Field**  | **Value**                                   |
-| ---------- | ------------------------------------------- |
-| IP Address | `193.23.160.33`                             |
-| ISP        | Unknown/suspicious                          |
-| AbuseIPDB  | Likely reported for spam/phishing (assumed) |
+*Screenshot 5: VirusTotal Analysis of `trust-wallet.com`*
 
-> **Suggested Screenshot**: AbuseIPDB report on `193.23.160.33`.
+* The domain `trust-wallet.com` has been flagged by security vendors for phishing.
+* The use of a hyphen is a common deception technique in domain impersonation.
 
 ---
 
 ## 5. Conclusions & Recommendations
 
-### 5.1 Phishing Indicators
+### 5.1 Key Phishing Indicators
 
-* ✅ **SPF Failed**: Spoofed sending IP.
-* ✅ **Domain Impersonation**: `trust-wallet.com` mimics `trustwallet.com`.
-* ✅ **Urgency Tactics**: Subject and body urge the user to act quickly.
-* ✅ **Malicious Link**: `https://trust-unlock.com` embedded in action button.
+* ✅ **SPF Failure** – Email sent from unauthorized IP.
+* ✅ **Domain Impersonation** – Use of `trust-wallet.com` to mimic `trustwallet.com`.
+* ✅ **Social Engineering** – Subject/body induce urgency.
+* ✅ **Malicious Redirect** – Link to `https://trust-unlock.com`.
 
-### 5.2 Action Items
+### 5.2 Recommended Actions
 
-1. **Block IoCs**:
+**1. Block Identified IOCs**:
 
-   * Domain: `trust-unlock.com`
-   * IP: `193.23.160.33`
-   * Email: `support@trust-wallet.com`
+* Domain: `trust-unlock.com`
+* IP Address: `193.23.160.33`
+* Sender Email: `support@trust-wallet.com`
 
-2. **Respond & Contain**:
+**2. Containment & Response**:
 
-   * Delete the phishing email from all mailboxes.
-   * Search SIEM/email gateway for other recipients of the subject:
+* Immediately delete the phishing email across all mailboxes.
+* Search SIEM or email gateway for the subject line:
 
-     * `"Verify your Wallet"` during February 2024.
-   * Search email logs for sender `support@trust-wallet.com`.
-   * Review network logs for any outbound connections to `https://trust-unlock.com`.
-   * If accessed, advise users to reset passwords and terminate sessions (Entra AD, if applicable).
-
-3. **Mitigation**:
-
-   * Block `trust-unlock.com` on proxy/firewall to prevent future access.
-   * Update email security policies to detect similar spoofed domains.
+  * `"Verify your Wallet"` during February 2024.
+* Review logs for sender `support@trust-wallet.com`.
+* Investigate outbound connections to `https://trust-unlock.com`.
+* If accessed, enforce password resets and session terminations (e.g., Entra ID).
 
 ---
 
 ## 6. Skills Learned
 
-* Email spoofing detection via SPF/DKIM/DMARC checks
-* Header analysis to identify forged domains and IPs
-* Link inspection: differentiating safe vs. disguised malicious URLs
-* OSINT: IP/domain reputation checks via AbuseIPDB, VirusTotal
-* Security response actions including SIEM/email gateway searching and containment
+* Performed forensic **email header analysis**.
+* Identified **domain impersonation** and spoofed infrastructure.
+* Evaluated embedded links for **deceptive redirection tactics**.
+* Leveraged **OSINT tools** (VirusTotal, WHOIS, AbuseIPDB) for threat attribution.
+* Executed **incident response workflow**, including containment, SIEM queries, and user notification.
 
 ---
 
-🔧 **Tools Used**:
+🔧 **Tools Utilized**:
 
-* Email Header Viewer / EML Parser
+* Email Header Analyzer / EML Parser
 * VirusTotal
-* WHOIS
+* WHOIS Lookup
 * AbuseIPDB
-* SIEM (for organization-wide searches)
-* Browser/hover inspection of embedded links
+* SIEM Platform (for log correlation)
+* Manual link inspection via browser hover analysis
 
 ---
-
-Let me know if you'd like this version exported to a PDF or Markdown file for documentation purposes, or if you'd like help preparing a presentation version.
-
