@@ -11,18 +11,6 @@ In this lab, I conducted a deep-dive analysis of a suspicious email to the recip
 
 ---
 
-### 1.1 Skills Learned
-
-- Email header forensics: parsing and interpreting Received, Authentication-Results, Message-ID, and X‑headers
-
-- Authentication analysis: understanding SPF, DKIM, and DMARC outcomes and implications
-
-- Mail flow tracing: mapping an email’s journey through multiple servers
-
-- OSINT investigations: performing WHOIS, VirusTotal, AbuseIPDB, and IPVoid lookups on domains and IP addresses
-
-- Social‑engineering detection: recognizing mismatched From/Reply-To, undisclosed recipients, and lure-based subject lines
-
 ## 2. Email Header Analysis
 
 ### 2.1 Mail Server Path (`Received` fields)
@@ -155,6 +143,19 @@ Clearly, the offer is too good to be true and designed to lure victims into a re
 
 3. **Next Steps**  
    - Notify users and the security team of this phishing campaign.  
-   - Update email filtering rules to flag future messages from `yobow.cn`.  
+   - Update email filtering rules to flag future messages from `yobow.cn`.
+  
+### 6. Skills Learned
+
+- Email header forensics: parsing and interpreting Received, Authentication-Results, Message-ID, and X‑headers
+
+- Authentication analysis: understanding SPF, DKIM, and DMARC outcomes and implications
+
+- Mail flow tracing: mapping an email’s journey through multiple servers
+
+- OSINT investigations: performing WHOIS, VirusTotal, AbuseIPDB, and IPVoid lookups on domains and IP addresses
+
+- Social‑engineering detection: recognizing mismatched From/Reply-To, undisclosed recipients, and lure-based subject lines
+
 
 ---
