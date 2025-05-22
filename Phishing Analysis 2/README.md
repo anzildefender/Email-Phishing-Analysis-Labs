@@ -61,7 +61,7 @@ In this lab, I analyzed a suspicious email claiming an account lockout. My goals
 ![Metadata](images/meta.png)
 *Screenshot 4: Message Metadata*
 
-"X-Mailer" value includes a user agent. This suggests that the attacker likely sent the email using a webmail interface, rather than the Outlook client. When we parse the user agent value we get
+"X-Mailer" value includes a user agent. This suggests that the attacker likely sent the email using a webmail interface, rather than the Outlook client. When we parse the user agent value using [User Agent Parser](https://explore.whatismybrowser.com/useragents/parse/#parse-useragent) we get
 ![parsed](images/parse.png)
 
 *Screenshot 5: Attacker used a webmail client (MacOS/Chrome).*  
@@ -124,7 +124,7 @@ Discovered an PDF attachement encodded in base64
 ### 4.2 Sender IP (`40.107.215.98`)  
 
 ![IP Reputation](images/ipreputation.png)  
-*Screenshot 13: IP Reputation in AbuseIPDB.*  
+*Screenshot 14: IP Reputation in AbuseIPDB.*  
 
 - **ISP**: Microsoft (legitimate cloud service IP).  
 - **AbuseIPDB**: Spam reports (low weight due to shared infrastructure).  
