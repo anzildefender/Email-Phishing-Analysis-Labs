@@ -141,7 +141,6 @@ The attacker disguises a malicious link beneath a trust-inspiring button. This i
 * Identified **domain impersonation** and spoofed infrastructure.
 * Evaluated embedded links for **deceptive redirection tactics**.
 * Leveraged **OSINT tools** (VirusTotal, WHOIS, AbuseIPDB) for threat attribution.
-* Executed **incident response workflow**, including containment, SIEM queries, and user notification.
 
 ---
 
