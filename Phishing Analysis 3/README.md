@@ -93,16 +93,11 @@ The attacker disguises a malicious link beneath a trust-inspiring button. This i
 | `trust-wallet.com` | Malicious – Registered with intent to impersonate |
 | `trust-unlock.com` | Malicious – Used in phishing redirection          |
 
-![virus total](images/virustotalclean.png)
+* Upon reviewing the 'trust-unlock.com" in URLSACN.io, Confirmed that it's a phishing page 
 
-*Screenshot 5: VirusTotal Analysis of `trustwallet.com`*
+![virus total](images/trus-unlock.png)
 
-![virus total](images/virustotal.png)
-
-*Screenshot 5: VirusTotal Analysis of `trust-wallet.com`*
-
-* The domain `trust-wallet.com` has been flagged by security vendors for phishing.
-* The use of a hyphen is a common deception technique in domain impersonation.
+*Screenshot 5: Phishing page asking for the Trust Wallet Recovery Phrase*
 
 ---
 
