@@ -72,7 +72,7 @@ In this lab, I analyzed a suspicious email claiming an account lockout. My goals
 
 ### 3.1 HTML Content  
 ![Email Body](images/body.png)  
-*Screenshot 6: Fake account lockout warning with "secure your account" urgency.*  
+*Screenshot 6: Fake account lockout warning with urgency.*  
 
 **Suspicious URLs**:  
 - `script.google[.]com/.../exec` (potential credential harvester embedded in the "Update Information" button )
@@ -88,7 +88,7 @@ In this lab, I analyzed a suspicious email claiming an account lockout. My goals
 ---
 
 ### 3.2 Base64 Attachment Analysis  
-Discovered an PDF attachement encodded in base64
+Discovered a PDF attachement encodded in base64
 
 **File**: `Detailsdisable-262340.pdf` (Base64-encoded HTML)  
 
@@ -116,7 +116,7 @@ Discovered an PDF attachement encodded in base64
 ![whois](images/whois.png)  
 *Screenshot 12: Domain Information*  
 
-- **VirusTotal**: 4 vendor flagged this domain as malicious  
+- **VirusTotal**: 4 vendors flagged this domain as malicious  
 
 ![VirusTotal Relations](images/whois5.png)  
 *Screenshot 13: Virus Total Analysis.*  
