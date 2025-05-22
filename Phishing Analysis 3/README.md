@@ -90,7 +90,6 @@ The attacker disguises a malicious link beneath a trust-inspiring button. This i
 | **Domain**         | **Observation**                                   |
 | ------------------ | ------------------------------------------------- |
 | `trustwallet.com`  | Legitimate – Official website of Trust Wallet     |
-| `trust-wallet.com` | Malicious – Registered with intent to impersonate |
 | `trust-unlock.com` | Malicious – Used in phishing redirection          |
 
 * Upon reviewing the 'trust-unlock.com" in URLSACN.io, Confirmed that it's a phishing page 
