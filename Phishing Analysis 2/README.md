@@ -14,7 +14,7 @@ In this lab, I analyzed a suspicious email claiming an account lockout. My goals
 ## 2. Email Header Analysis  
 
 ### 2.1 Mail Server Path (`Received` Fields)  
-![Received Fields](images/received.jpg)  
+![Received Fields](images/recieved.jpg)  
 *Screenshot 1: Email routed through Microsoft Outlook servers (`outlook.office365[.]com`).*  
 
 **Key Observations**:  
@@ -24,7 +24,7 @@ In this lab, I analyzed a suspicious email claiming an account lockout. My goals
 ---
 
 ### 2.2 Authentication Results  
-![Authentication-Results](images/auth_results.png)  
+![Authentication-Results](images/auth.png)  
 *Screenshot 2: SPF passed (Microsoft IP), DKIM not configured.*  
 
 | **Check** | **Result**       | **Implication**                          |  
@@ -39,7 +39,12 @@ In this lab, I analyzed a suspicious email claiming an account lockout. My goals
 - **Return-Path**: `nuthostsrl.SaintU74045Walker@comunidadeduar[.]com.ar`  
 - **From**: `noreply@Quick Response <nuthostsrl.SaintU74045Walker@comunidadeduar[.]com.ar>`  
 - **To**: Undisclosed recipients  
-- **Subject**: `We locked your account for security reason - Fri, September 08, 2023 10:11 AM`  
+- **Subject**: `We locked your account for security reason - Fri, September 08, 2023 10:11 AM`
+
+![Return-Path](images/returnpath.png)  
+![From](images/from.png)  
+![Subject](images/subject.png)  
+*Screenshot 3: Envelope & Display Fields*
 
 **Red Flags**:  
 - Mismatched display name (`noreply@Quick Response`) vs. email domain.  
@@ -51,36 +56,53 @@ In this lab, I analyzed a suspicious email claiming an account lockout. My goals
 - **Date**: `Fri, 8 Sep 2023 10:11:07 +0500`  
 - **Message-ID**: `<lCoLrriMV1genj0ZtZQMKEVTBnhfL56Wal3quBo1vU@mail-pf1-f856.outlook.office365.com>`  
 - **X-Mailer**: `WebService/1.1.18291 YMailNorrin` (MacOS Chrome user agent)  
-- **Content-Type**: `multipart/mixed` with boundary `NextPart`  
+- **Content-Type**: `multipart/mixed` with boundary `NextPart`
 
-![X-Mailer Analysis](images/xmailer_webservice.png)  
-*Screenshot 3: Attacker used a webmail client (MacOS/Chrome).*  
+![Metadata](images/meta.png)
+*Screenshot 4: Message Metadata*
+
+"X-Mailer" value includes a user agent. This suggests that the attacker likely sent the email using a webmail interface, rather than the Outlook client. When we parse the user agent value we get
+![parsed](images/parse.png)
+
+*Screenshot 5: Attacker used a webmail client (MacOS/Chrome).*  
 
 ---
 
 ## 3. Email Body & Attachments  
 
 ### 3.1 HTML Content  
-![Email Body](images/body_scarcity.png)  
-*Screenshot 4: Fake account lockout warning with "secure your account" urgency.*  
+![Email Body](images/body.png)  
+*Screenshot 6: Fake account lockout warning with "secure your account" urgency.*  
 
 **Suspicious URLs**:  
-- `facebook[.]com` (decoy link)  
-- `script.google[.]com/.../exec` (potential credential harvester)  
+- `script.google[.]com/.../exec` (potential credential harvester embedded in the "Update Information" button )
+
+![body](images/href.png)
+*Screenshot 7: Embeedded Link.*  
+
+![harvester](images/harvester.png)
+
+
+*Screenshot 8: Potential Harvester.*  
 
 ---
 
 ### 3.2 Base64 Attachment Analysis  
-**File**: `Detailsdisable-262340.pdf` (Base64-encoded HTML)  
-1. **Decoding with CyberChef**:  
-   ![CyberChef Decoding](images/cyberchef_base64.png)  
-   *Screenshot 5: Revealed HTML content instead of PDF.*  
+Discovered an PDF attachement encodded in base64
 
-2. **File Type Verification**:  
-   ```bash
-   $ file Detailsdisable-262340.pdf  
-   HTML document, UTF-8 Unicode text
-   ```  
+**File**: `Detailsdisable-262340.pdf` (Base64-encoded HTML)  
+
+![Attachment](images/contenttype2.jpg)  
+*Screenshot 9: PDF Attachment.*  
+
+1. **Decoding with CyberChef**:  
+   ![CyberChef Decoding](images/base64.2.png)
+   *Screenshot 10: Decoded in cyberchef.*  
+   
+2. **I Saved the file to my system as "download.malware" and checked the file type and it wasn't a PDF file rather it was an html file**
+   ![CyberChef Decoding](images/html.jpg)
+   
+   *Screenshot 11: Revealed HTML content instead of PDF.*  
 
 **Risk**: Masquerading HTML as PDF to bypass filters.  
 
@@ -89,13 +111,21 @@ In this lab, I analyzed a suspicious email claiming an account lockout. My goals
 ## 4. OSINT & Reputation Checks  
 
 ### 4.1 Sender Domain (`comunidadeduar[.]com.ar`)  
-- **DomainTools**: Created 2013-07-10 (Buenos Aires, Argentina).  
-- **VirusTotal**: 1 vendor flag + subdomain `google.comunidadeduar[.]com.ar` linked to phishing.  
+- **DomainTools**: Created 2013-07-10 (Buenos Aires, Argentina).
 
-![VirusTotal Relations](images/virustotal_pivot.png)  
-*Screenshot 6: Phishing-linked subdomains.*  
+![whois](images/whois.png)  
+*Screenshot 12: Domain Information*  
+
+- **VirusTotal**: 4 vendor flagged this domain as malicious  
+
+![VirusTotal Relations](images/whois5.png)  
+*Screenshot 13: Virus Total Analysis.*  
 
 ### 4.2 Sender IP (`40.107.215.98`)  
+
+![IP Reputation](images/ipreputation.png)  
+*Screenshot 13: IP Reputation in AbuseIPDB.*  
+
 - **ISP**: Microsoft (legitimate cloud service IP).  
 - **AbuseIPDB**: Spam reports (low weight due to shared infrastructure).  
 
