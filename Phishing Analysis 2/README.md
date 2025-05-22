@@ -3,7 +3,7 @@
 
 ## 1. Aim
 
-In this lab exercise, I analyzed a suspicious email that falsely claimed the recipient’s account had been locked. The objective was to examine the email's authenticity, identify phishing tactics, and assess the risks using forensic analysis and OSINT tools.
+In this lab exercise, I analyzed a suspicious email that falsely claimed the recipient’s account had been locked. The objective was to examine the email's authenticity, identify phishing tactics, and assess the risks using header analysis and OSINT tools.
 
 ---
 
