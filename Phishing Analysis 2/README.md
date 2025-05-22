@@ -14,7 +14,7 @@ In this lab, I analyzed a suspicious email claiming an account lockout. My goals
 ## 2. Email Header Analysis  
 
 ### 2.1 Mail Server Path (`Received` Fields)  
-![Received Fields](images/received_microsoft.png)  
+![Received Fields](images/received.jpg)  
 *Screenshot 1: Email routed through Microsoft Outlook servers (`outlook.office365[.]com`).*  
 
 **Key Observations**:  
